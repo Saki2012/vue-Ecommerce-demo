@@ -12,12 +12,14 @@ const getProductListByCategoryId = async function(ctx){
 }
 
 const getProductListAndCategories = async function(ctx){
-    let result = {};
+    let result = [];
+    let categories =[];
     try{
       result = await product.getProductsList();
-      result.categories = await product.getProductCategories();
+      categories = await product.getProductCategories();
       ctx.body = {
           success: true,
+          categories: categories,
           result: result
       }
     }
