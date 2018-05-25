@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="basicExampleNav">
           <!-- Links -->
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"  @click.self="setCId(0)">
+            <li class="nav-item"  v-bind:class="{'active': (categoryId === 0)}"  v-on:click.prevent="setCId(0)">
               <a class="nav-link waves-effect waves-light">全部
                 <span class="sr-only">(current)</span>
               </a>
@@ -131,7 +131,6 @@ export default {
       filter_text: '',
       categoryId: 0,
       categories:[],
-      cId: 0,
       list:[]
     };
   },
@@ -184,11 +183,7 @@ export default {
       this.currPage = idx;
     },
     setCId: function(id){
-      
       this.categoryId = id;
-      this.cId = id;
-      
-      console.log(this.categoryId);
     }
   }
 }

@@ -31,9 +31,9 @@
           <div v-if="userInfo">
             <li class="nav-item">
               <a class=" waves-effect">     Hi!  {{userInfo.userName}}   </a>
-              <a class=" waves-effect">
+              <a class=" waves-effect" href="/Cart">
                 <span class="badge red z-depth-1 mr-1"> 1 </span>
-                <i class="fa fa-shopping-cart"></i>
+                <icon  name="shopping-cart"></icon>
                 <span class="clearfix d-none d-sm-inline-block"> Cart </span>
               </a>
              </li>

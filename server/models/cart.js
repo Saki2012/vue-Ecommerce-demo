@@ -57,10 +57,22 @@ const createCart = async function(data){
     return cart;
 }
 
+const removeCart = async function (id, user_id){
+    await Cart.destroy({
+    where: {
+      id,
+      user_id
+    }
+  })
+  return true
+}
+
+
 
 module.exports = {
     getCartByProductId,
     createCart,
     getCartByUserId,
+    removeCart,
     getCartById
 }

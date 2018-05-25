@@ -9,5 +9,7 @@ router.delete('/todolist/:userId/:id', api.getProductById);
 */
 router.post('/cart/create', cart.createCart);
 router.post('/cart/list', cart.getCartByUserId);
+router.delete('/cart/:userId/:id', cart.removeCart);
+
 
 module.exports = router; //導出router

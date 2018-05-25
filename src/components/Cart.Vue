@@ -5,7 +5,7 @@
       <!--Grid row-->
       <div class="row">
        <!--Grid column-->
-        <div class="col-md-12 mb-12">
+        <div class="col-md-12 mb-6">
           <!-- Heading -->
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted"></span>
@@ -39,15 +39,15 @@
 							</td>
 							<td data-th="Subtotal" class="text-center">${{subTotal[index]}}</td>
 							<td class="actions" data-th="">
-								<button class="btn btn-danger btn-sm">刪除</i></button>								
+								<button class="btn btn-danger btn-sm" @click="remove(index)">刪除</i></button>								
 							</td>
 						</tr>
           </template>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="4" class="hidden-xs"></td>
-							<td class="hidden-xs text-center"><strong>總計 ${{Total}} </strong></td>
+							<td colspan="3" class="hidden-xs"></td>
+							<td colspan="2"class="hidden-xs text-center"><strong><h4>總計  ${{Total}}</h4> </strong></td>
 						</tr>
 					</tfoot>
 				  </table>
@@ -57,10 +57,10 @@
         
 
         <!--Grid column-->
-        <div class="col-md-8 mb-4">
-           
+        <div class="col-md-12 mb-4 " style="pointer-events:none;"><!-- temporary disabled -->
+           <div class="message"><b>結帳功能暫不開放</b></div><!-- temporary disabled -->
           <!--Card-->
-          <div class="card">
+          <div class="card blur0">
             <h2 class="my-5 h2 text-center"><b>結帳</b></h2>
             <!--Card content-->
             <form class="card-body">
@@ -253,7 +253,7 @@ export default {
       account: '',
       password: '',
       userId: 2, //tester purpose
-      list:{}
+      list:[]
     };
   },
   computed:{
@@ -285,6 +285,23 @@ export default {
         console.log(err)
       })
       return ProductList
+    },
+    remove(index) {
+      this.$http.delete('/api/cart/' +this.userId + '/'+ this.list[index].id)
+        .then((res) => {
+          if(res.status == 200){
+            this.$message({
+              type: 'success',
+              message: '删除成功！'
+            })
+            this.GetCartList();
+          }else{
+            this.$message.error('删除失败！')
+          }
+        }, (err) => {
+          this.$message.error('删除失败！')
+          console.log(err)
+        })
     }
   }
 }
@@ -303,5 +320,16 @@ export default {
   .el-button{
     width: 100%;
     margin-top: 12px;
+  }
+  .blur0{
+    -webkit-filter:blur(3px);
+  }  
+  .message{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:200px;
+    height:150px;
+    border:1px solid #000;
   }
 </style>

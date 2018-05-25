@@ -28,6 +28,17 @@ const createCart = async function(ctx){
     }
 }
 
+const removeCart = async function (ctx) {
+    const id = ctx.params.id
+    const userId = ctx.params.userId
+    const success = await Cart.removeCart(id, userId)
+  
+    ctx.body = {
+      success
+    }
+  }
+  
+
 const getCartByUserId = async function(ctx){
     const data = ctx.request.body;
     let result = await Cart.getCartByUserId(data.userId); 
@@ -41,5 +52,6 @@ module.exports = {
     getCartById,
     getCartByProductId,
     getCartByUserId,
+    removeCart,
     createCart
 }
