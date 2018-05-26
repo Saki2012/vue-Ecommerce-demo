@@ -66,7 +66,7 @@ export default {
     const userdata = this.getUserInfo();
     if(userdata != null){
       this.userInfo = userdata;
-      this.userInfo.cartCount = this.userInfo.cartCount
+      aaaathis.userInfo.cartCount = this.userInfo.cartCount
     }
     Bus.$on('LoggedInUser', userDataToken => {  
         this.userInfo = jwt.decode(userDataToken);
