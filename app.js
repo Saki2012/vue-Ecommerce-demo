@@ -39,7 +39,7 @@ app.on('error', function (err, ctx) {
 
 router.use("/product", product.routes());
 router.use('/auth', auth.routes()); 
-router.use("/api", jwt({secret: 'vue-koa-demo'}), api.routes()); // api 路徑以下都需要檢查TOKEN
+router.use("/api", jwt({secret: 'vue-koa-eccomerce'}), api.routes()); // api 路徑以下都需要檢查TOKEN
 
 app.use(router.routes()); 
 

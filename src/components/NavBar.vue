@@ -32,9 +32,10 @@
             <li class="nav-item">
               <a class=" waves-effect">     Hi!  {{userInfo.userName}}   </a>
               <a class=" waves-effect" href="/Cart">
-                <span class="badge red z-depth-1 mr-1"> 1 </span>
+                
                 <icon  name="shopping-cart"></icon>
                 <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                <span class="badge red z-depth-1 mr-1"  v-if="userInfo.cartCount > 0">  {{userInfo.cartCount}} </span>
               </a>
              </li>
           </div>
@@ -58,16 +59,26 @@
 
 import jwt from 'jsonwebtoken' 
 
+import Bus from '../setup/eventBus.js'
+
 export default {
   created(){
     const userdata = this.getUserInfo();
     if(userdata != null){
       this.userInfo = userdata;
+      this.userInfo.cartCount = this.userInfo.cartCount
     }
+    Bus.$on('LoggedInUser', userDataToken => {  
+        this.userInfo = jwt.decode(userDataToken);
+    });  
+    Bus.$on('cartCountUpdate', count => {  
+        this.cartCount += count;
+    });  
   },
   data () {
     return {
       userInfo: null,
+      cartCount: 0
     };
   },
   methods:{
@@ -79,6 +90,7 @@ export default {
       const token = sessionStorage.getItem('EC-demo-token');
       if(token != null && token != 'null'){
         let decode = jwt.decode(token); // 解析token
+        console.log(decode);
         return decode // decode解析出来实际上就是{name: ......}
       }else {
         return null

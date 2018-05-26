@@ -57,7 +57,6 @@
                 <!--Category & Title-->
                 <a class="grey-text" v-bind:href="['/Product/'+item.id]">
                   <h5>{{item.category.name}}</h5>
-                  <h5>{{item.id}}</h5>
                 </a>
                 <h5>
                   <strong>

@@ -58,7 +58,7 @@
 
         <!--Grid column-->
         <div class="col-md-12 mb-4 " style="pointer-events:none;"><!-- temporary disabled -->
-           <div class="message"><b>結帳功能暫不開放</b></div><!-- temporary disabled -->
+           <div><b>結帳功能暫不開放</b></div><!-- temporary disabled -->
           <!--Card-->
           <div class="card blur0">
             <h2 class="my-5 h2 text-center"><b>結帳</b></h2>
@@ -244,6 +244,8 @@
 </template>
 
 <script>
+import Bus from '../setup/eventBus.js'
+
 export default {
   created(){
     this.GetCartList();
@@ -294,6 +296,7 @@ export default {
               type: 'success',
               message: '删除成功！'
             })
+            Bus.$emit('cartCountUpdate', -1); 
             this.GetCartList();
           }else{
             this.$message.error('删除失败！')
@@ -324,12 +327,4 @@ export default {
   .blur0{
     -webkit-filter:blur(3px);
   }  
-  .message{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:200px;
-    height:150px;
-    border:1px solid #000;
-  }
 </style>
