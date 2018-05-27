@@ -105,6 +105,8 @@
 
 import jwt from 'jsonwebtoken' 
 
+import Bus from '../setup/eventBus.js'
+
 export default {
   created(){
     this.GetProductInfo();
@@ -152,6 +154,7 @@ export default {
                 type: 'success',
                 message: '商品已加入購物車！'
             });
+            Bus.$emit('cartCountUpdate', 1); 
           }else{
             this.$message.error('商品加入失敗')
           }

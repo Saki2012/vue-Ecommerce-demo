@@ -1,4 +1,5 @@
-# vue簡易網店
+# vue-簡易網店
+
 > test
 
 ## Build Setup

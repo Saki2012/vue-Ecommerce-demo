@@ -15,6 +15,15 @@ Vue.use(ElementUI)
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 
+import 'vue-awesome/icons'
+
+/* Register component with one of 2 methods */
+
+import Icon from 'vue-awesome/components/Icon'
+
+// globally (in your main .js file)
+Vue.component('icon', Icon)
+
 import Login from './components/Login'
 import Index from './components/Index'
 import Product from './components/Product'

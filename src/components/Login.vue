@@ -25,6 +25,9 @@
 <script>
 import auth from '../auth'
 
+import Bus from '../setup/eventBus.js'
+
+
 export default {
   data () {
     return {
@@ -46,6 +49,7 @@ export default {
         .then((res) => {
           if(res.data.success){ 
             sessionStorage.setItem('EC-demo-token',res.data.token); // 用sessionStorage把token存下来
+            Bus.$emit('LoggedInUser', res.data.token);   
             this.$message({ 
               type: 'success',
               message: '登入成功！'

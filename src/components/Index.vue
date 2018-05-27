@@ -12,19 +12,13 @@
         <div class="collapse navbar-collapse" id="basicExampleNav">
           <!-- Links -->
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link waves-effect waves-light" href="#">全部
+            <li class="nav-item"  v-bind:class="{'active': (categoryId === 0)}"  v-on:click.prevent="setCId(0)">
+              <a class="nav-link waves-effect waves-light">全部
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a  @click.prevent="setCId(1)" class="nav-link waves-effect waves-light" href="#">Shirts</a>
-            </li>
-            <li class="nav-item">
-              <a  @click.prevent="setCId(2)" class="nav-link waves-effect waves-light" href="#">Sport wears</a>
-            </li>
-            <li class="nav-item">
-              <a  @click.prevent="setCId(3)" class="nav-link waves-effect waves-light" href="#">Outwears</a>
+            <li class="nav-item" v-for="c in categories"  v-bind:class="{'active': (categoryId === (c.id))}"  v-on:click.prevent="setCId(c.id)">
+              <span class="nav-link waves-effect waves-light">{{c.name}}</span>
             </li>
           </ul>
           <!-- Links -->
@@ -52,7 +46,7 @@
               <!--Card image-->
               <div class="view overlay">
                 <img class="img-fluid" alt="" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
-                <a href="/Product/1">
+                <a v-bind:href="['/Product/'+item.id]">
                   <div class="mask rgba-white-slight waves-effect waves-light"></div>
                 </a>
               </div>
@@ -61,13 +55,12 @@
               <!--Card content-->
               <div class="card-body text-center">
                 <!--Category & Title-->
-                <a class="grey-text" href="/Product/1">
+                <a class="grey-text" v-bind:href="['/Product/'+item.id]">
                   <h5>{{item.category.name}}</h5>
-                  <h5>{{item.id}}</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a class="dark-grey-text" href="/Product/1">{{item.name}}
+                    <a class="dark-grey-text" v-bind:href="['/Product/'+item.id]">{{item.name}}
                       <span class="badge badge-pill danger-color">NEW</span>
                     </a>
                   </strong>
@@ -132,27 +125,32 @@ export default {
   },
   data () {
     return {
-      account: '',
-      password: '',
       countOfPage: 8,
       currPage: 1,
       filter_text: '',
-      filteredRowCount: null,
       categoryId: 0,
+      categories:[],
       list:[]
     };
   },
   computed: {
     filteredList: function(){
       var self = this;
-      // 因為 JavaScript 的 filter 有分大小寫，
+      var result = this.list;
       // 所以這裡將 filter_name 與 rows[n].name 通通轉小寫方便比對。
       var filter_name = this.filter_text.toLowerCase();
-    
-      // 如果 filter_name 有內容，回傳過濾後的資料，否則將原本的 rows 回傳。
-      return ( this.filter_name !== '' || this.categoryId>0) ? 
-          this.list.filter(function(d){ return d.name.toLowerCase().indexOf(filter_name) > -1 || d.category.id === self.categoryId; }) : 
-          this.list;
+      
+      // 如果 categoryId 有內容，過濾資料
+      if ( this.categoryId > 0 ) {
+        result = result.filter(function(d){ return d.category.id === self.categoryId; });
+      }
+
+      // 如果 filter_name 有內容，過濾資料
+      if ( this.filter_name !== '' ) {
+        result = result.filter(function(d){ return d.name.toLowerCase().indexOf(filter_name) > -1 ; });
+      }
+      
+      return result;
     },
     pageStart: function(){
         return (this.currPage - 1) * this.countOfPage;
@@ -167,6 +165,7 @@ export default {
       .then((res) => {
         if(res.status == 200){
           this.list = res.data.result 
+          this.categories = res.data.categories 
         }else{
           this.$message.error('获取列表失败！')
         }
@@ -183,7 +182,6 @@ export default {
       this.currPage = idx;
     },
     setCId: function(id){
-      console.log(id);
       this.categoryId = id;
     }
   }
