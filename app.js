@@ -15,7 +15,6 @@ const path =require('path')
 
 const app = new Koa();
 
-let port = process.env.PORT
 
 app.use(require('koa-bodyparser')());
 app.use(json());
@@ -46,8 +45,9 @@ app.use(router.routes());
 app.use(serve(path.resolve('dist')));// webpack build出的目录作为Koa静态文件服务的目录，需要在router運行之後才執行，否則呼叫API先會回應完整的頁面內容
 // for product use
 
-app.listen(3000,() => {
-  console.log('Koa is listening in 3000');
+var port = process.env.PORT || 3000;
+app.listen(port,() => {
+  console.log('Koa is listening in'+port);
 });
 
 module.exports = app;
