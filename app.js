@@ -6,11 +6,11 @@ const auth = require('./server/routes/auth.js'); // 引入auth
 const api =  require('./server/routes/api.js'); // 引入api
 const product =  require('./server/routes/product.js'); // 引入api
 const jwt = require('koa-jwt');
-/*const historyApiFallback = require('koa-history-api-fallback'); 
+const historyApiFallback = require('koa-history-api-fallback'); 
 
 const path =require('path')
     , serve = require('koa-static');
-*/
+
 // for product use
 
 const app = new Koa();
@@ -20,9 +20,9 @@ let port = process.env.PORT
 app.use(require('koa-bodyparser')());
 app.use(json());
 app.use(logger());
-/*
+
 app.use(historyApiFallback());
-*/
+
 
 // for product use
 
@@ -43,7 +43,7 @@ router.use("/api", jwt({secret: 'vue-koa-eccomerce'}), api.routes()); // api 路
 
 app.use(router.routes()); 
 
-//app.use(serve(path.resolve('dist')));// webpack build出的目录作为Koa静态文件服务的目录，需要在router運行之後才執行，否則呼叫API先會回應完整的頁面內容
+app.use(serve(path.resolve('dist')));// webpack build出的目录作为Koa静态文件服务的目录，需要在router運行之後才執行，否則呼叫API先會回應完整的頁面內容
 // for product use
 
 app.listen(3000,() => {
