@@ -8,16 +8,24 @@
         <el-input 
           v-model="account"
           placeholder="帳號"
-          type="text">
+          type="text" >
+          
         </el-input>
         <el-input
           v-model="password"
           placeholder="密碼"
-          type="password">
+          type="password"> 
         </el-input>
         <el-button type="primary" @click="login">登入</el-button>
        <router-link v-bind:to="'signup'">註冊</router-link>
       </el-row>
+    </el-col>
+    <el-col>
+     <el-row>
+       <span class="">
+       未開放註冊，可以直接使用預設帳號登入
+       </span>
+     </el-row>
     </el-col>
   </el-row>
 </template>
@@ -31,8 +39,8 @@ import Bus from '../setup/eventBus.js'
 export default {
   data () {
     return {
-      account: '',
-      password: ''
+      account: 'tester',
+      password: '123'
     };
   },
   methods:{

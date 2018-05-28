@@ -44,8 +44,8 @@
             <div class="card">
 
               <!--Card image-->
-              <div class="view overlay">
-                <img class="img-fluid" alt="" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
+              <div class="view overlay box">
+                <img class="img-fluid img" alt="" v-bind:src="['/static/product/'+item.id+'-1.jpg']" onerror="this.src='/static/product/logo.png'">
                 <a v-bind:href="['/Product/'+item.id]">
                   <div class="mask rgba-white-slight waves-effect waves-light"></div>
                 </a>
@@ -167,10 +167,10 @@ export default {
           this.list = res.data.result 
           this.categories = res.data.categories 
         }else{
-          this.$message.error('获取列表失败！')
+          this.$message.error('獲取列表失敗！')
         }
       }, (err) => {
-        this.$message.error('获取列表失败！')
+        this.$message.error('獲取列表失敗！')
         console.log(err)
       })
       return ProductList
@@ -201,5 +201,20 @@ export default {
   .el-button{
     width: 100%;
     margin-top: 12px;
+  }
+
+  .box {
+    height : 330px;
+    text-align : center;
+  }
+
+  .img {
+    vertical-align : middle;
+    position: absolute !important;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  margin: auto;
   }
 </style>

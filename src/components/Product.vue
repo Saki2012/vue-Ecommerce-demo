@@ -5,9 +5,9 @@
       <div class="row wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
 
         <!--Grid column-->
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-4 box ">
 
-          <img class="img-fluid" alt="" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg">
+         <img class="img-fluid img" style="height: 330px;"  alt="" v-bind:src="['/static/product/'+product.id+'-1.jpg']" onerror="this.src='/static/product/logo.png'">
 
         </div>
         <!--Grid column-->
@@ -32,7 +32,7 @@
             </p>
 
             <p class="lead font-weight-bold">{{product.name}}</p>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="height: 40px;">
               <!-- Default input -->
               <input class="form-control" style="width: 100px" aria-label="Search" type="number" v-model="quantity">
               <button class="btn btn-primary btn-md my-0 p waves-effect waves-light" @click="CreateCart">Add to cart
@@ -74,23 +74,23 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4">
 
-          <img class="img-fluid" alt="" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg">
+          <img class="img-fluid" alt="" v-bind:src="['/static/product/'+product.id+'-1.jpg']" onerror="this.src='/static/product/logo.png'">
 
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4 ">
 
-          <img class="img-fluid" alt="" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg">
+          <img class="img-fluid " alt="" v-bind:src="['/static/product/'+product.id+'-2.jpg']" onerror="this.src='/static/product/logo.png'">
 
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4 ">
 
-          <img class="img-fluid" alt="" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg">
+          <img class="img-fluid " alt="" v-bind:src="['/static/product/'+product.id+'-3.jpg']" onerror="this.src='/static/product/logo.png'">
 
         </div>
         <!--Grid column-->
@@ -181,3 +181,20 @@ export default {
   }
 }
 </script>
+
+<style>
+  .box {
+    height : 330px;
+    text-align : center;
+  }
+
+  .img {
+    vertical-align : middle;
+    position: absolute !important;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  margin: auto;
+  }
+</style>

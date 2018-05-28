@@ -64,22 +64,22 @@ export default {
         phone:this.phone,
         password: this.password
       } 
-      this.$http.post('/auth/user/create', obj) // 将信息发送给后端
-        .then((res) => { // axios返回的数据都在res.data里
-          if(res.data.success){ // 如果成功
-            sessionStorage.setItem('EC-demo-token',res.data.token); // 用sessionStorage把token存下来
-            this.$message({ // 登录成功，显示提示语
+      this.$http.post('/auth/user/create', obj) 
+        .then((res) => { 
+          if(res.data.success){ 
+            sessionStorage.setItem('EC-demo-token',res.data.token);
+            this.$message({
               type: 'success',
-              message: '登录成功！'
+              message: '登入成功！'
             }); 
-            this.$router.push('/') // 进入todolist页面，登录成功
+            this.$router.push('/') 
           }else{
-            this.$message.error(res.data.info); // 登录失败，显示提示语
-            sessionStorage.setItem('EC-demo-token',null); // 将token清空
+            this.$message.error(res.data.info); 
+            sessionStorage.setItem('EC-demo-token',null); 
           }
         }, (err) => {
-            this.$message.error('请求错误！')
-            sessionStorage.setItem('EC-demo-token',null); // 将token清空
+            this.$message.error('請求錯誤！')
+            sessionStorage.setItem('EC-demo-token',null); 
         })
       }
     }

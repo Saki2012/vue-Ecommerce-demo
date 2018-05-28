@@ -280,10 +280,10 @@ export default {
         if(res.status == 200){
         this.list = res.data.result
         }else{
-          this.$message.error('获取列表失败！')
+          this.$message.error('獲取列表失敗！')
         }
       }, (err) => {
-        this.$message.error('获取列表失败！')
+        this.$message.error('獲取列表失敗！')
         console.log(err)
       })
       return ProductList

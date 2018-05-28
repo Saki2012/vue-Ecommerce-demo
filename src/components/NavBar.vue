@@ -1,7 +1,6 @@
 <template>
    <nav class="navbar navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
-
       <!-- Brand -->
       <a class="navbar-brand waves-effect" href="/" target="_blank">
         <strong class="blue-text">LOGO</strong>
@@ -23,6 +22,8 @@
               <span class="sr-only"></span>
             </a>
           </li>
+          
+          
 
         </ul>
 
@@ -64,7 +65,6 @@ import Bus from '../setup/eventBus.js'
 export default {
   created(){
     const userdata = this.getUserInfo();
-    console.log("logged")
     if(userdata != null){
       this.userInfo = userdata;
       this.cartCount = this.userInfo.cartCount;
